@@ -1,9 +1,7 @@
-.gradle
-/build/
-gradle-app.setting
-.gradletasknamecache
 *.class
+build/
+.gradle
 
 *.jar
+*.aar
 *.war
-*.ear

@@ -11,6 +11,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URLDecoder;
 import java.util.List;
 
@@ -39,7 +41,14 @@ public class HelperController {
 
             String filename = response.getFirstHeader("Content-Disposition").getValue();
             String name = URLDecoder.decode(filename.substring(filename.indexOf("''")+32), "UTF-8");
-            
+
+            FileOutputStream fos = new FileOutputStream(name);
+            entity.writeTo(fos);
+
+            InputStream is = entity.getContent();
+
+            is.close();
+            fos.close();
         }
 
         return true;
